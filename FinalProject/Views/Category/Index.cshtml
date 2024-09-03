@@ -1,0 +1,35 @@
+﻿@model IEnumerable<FinalProject.Models.Category>
+
+@{
+    ViewData["Title"] = "Category List";
+}
+
+<h2>Category List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@category.CategoryId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@category.CategoryId">Edit</a> |
+                    <form asp-action="Delete" asp-route-id="@category.CategoryId" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-link">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Add New Category</a>
