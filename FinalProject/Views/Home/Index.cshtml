@@ -5,4 +5,12 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h2 class="mt-4">Navigate to:</h2>
+    <ul class="list-unstyled">
+        <li><a asp-controller="User" asp-action="Register" class="btn btn-primary">Register a New User</a></li>
+        <li><a asp-controller="User" asp-action="Login" class="btn btn-secondary">Login</a></li>
+        <li><a asp-controller="Product" asp-action="Index" class="btn btn-success">View All Products</a></li>
+        <li><a asp-controller="Category" asp-action="Index" class="btn btn-info">View All Categories</a></li>
+    </ul>
 </div>
