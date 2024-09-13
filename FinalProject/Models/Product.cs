@@ -22,8 +22,10 @@ namespace FinalProject.Models
         [Range(0, int.MaxValue, ErrorMessage = "Quantity must be a positive number.")]
         public int Quantity { get; set; }
 
-        [StringLength(200)]
-        public string ImagePath { get; set; }
+        /// <summary>
+        /// [StringLength(200)]
+        /// </summary>
+        ///public string ImagePath { get; set; }
 
         // Foreign Key
         public int CategoryId { get; set; }

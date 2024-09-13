@@ -2,7 +2,6 @@
 using FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace FinalProject.Controllers
 {
@@ -15,25 +14,26 @@ namespace FinalProject.Controllers
             _context = context;
         }
 
-        // Action method to return a view that displays a Table of all Categories
+        [HttpGet]
         public IActionResult Index()
         {
+            // Retrieve all categories from the database
             var categories = _context.Categories.ToList();
             return View(categories);
         }
 
-        // Action method to return a view that displays Details info of one Category
+        [HttpGet]
         public IActionResult Details(int id)
         {
+            // Find the category by ID, including its associated products
             var category = _context.Categories.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
             return View(category);
         }
 
-        // Action method to add a new Category
         [HttpGet]
         public IActionResult Create()
         {
@@ -52,14 +52,14 @@ namespace FinalProject.Controllers
             return View(category);
         }
 
-        // Action method to Edit an existing Category
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            // Find the category by ID
             var category = _context.Categories.Find(id);
             if (category == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
             return View(category);
         }
@@ -69,6 +69,7 @@ namespace FinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Update the category
                 _context.Categories.Update(category);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,14 +77,14 @@ namespace FinalProject.Controllers
             return View(category);
         }
 
-        // Action method to delete a Category
         [HttpPost]
         public IActionResult Delete(int id)
         {
+            // Find the category by ID
             var category = _context.Categories.Find(id);
             if (category == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
             _context.Categories.Remove(category);
             _context.SaveChanges();
